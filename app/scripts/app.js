@@ -4,7 +4,17 @@
          .html5Mode({
              enabled: true,
              requireBase: false
-         });
+          });
+
+      $stateProvider
+        .state('landing', {
+          url: '/',
+          templaterUrl: '/templates/landing.html'
+        })
+        .state('album', {
+          url: '/album',
+          templateUrl: '/templates/album.html'
+        });
     }
 
 angular
