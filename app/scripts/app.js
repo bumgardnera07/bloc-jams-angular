@@ -9,7 +9,7 @@
       $stateProvider
         .state('landing', {
           url: '/',
-          templaterUrl: '/templates/landing.html'
+          templateUrl: '/templates/landing.html'
         })
         .state('album', {
           url: '/album',
