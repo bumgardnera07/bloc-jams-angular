@@ -24,14 +24,21 @@
         song.playing = true;
       }
       /**
+      * @function stopSong
+      * @desc Stops currently scoped song and sets playing property to null
+      */
+      var stopSong = function(song) {
+        currentBuzzObject.stop();
+        song.playing = null;
+      }
+      /**
       * @function setSong
       * @desc Stops currently playing song and loads new audio file as currentBuzzObject
       * @param {Object} song
       */
       var setSong = function(song) {
           if (currentBuzzObject) {
-            currentBuzzObject.stop();
-            SongPlayer.currentSong.playing = null;
+            stopSong(SongPlayer.currentSong);
           }
 
           currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -40,6 +47,7 @@
           });
 
           SongPlayer.currentSong = song;
+          SongPlayer.currentAlbum = currentAlbum;
           };
           /**
           * @function getSongIndex
@@ -54,6 +62,11 @@
           * @type {Object}
           */
           SongPlayer.currentSong = null;
+          /**
+          * @desc current song object from album songs array
+          * @type {Object}
+          */
+          SongPlayer.currentAlbum = null;
           /**
           * @function .play
           * @desc public method for switching songs and playing songs when none are playing
@@ -89,13 +102,24 @@
         currentSongIndex--;
 
         if (currentSongIndex < 0) {
-          currentBuzzObject.stop();
-          SongPlayer.currentSong.playing = null;
+          stopSong(SongPlayer.currentSong);
         } else {
           var song = currentAlbum.songs[currentSongIndex];
           setSong(song);
           playSong(song);
           }
+    };
+    /**
+    * @function .next
+    * @desc increments the currentSongIndex value
+    */
+    SongPlayer.next = function() {
+        var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+        currentSongIndex++;
+
+          var song = currentAlbum.songs[currentSongIndex];
+          setSong(song);
+          playSong(song);
     };
 
          return SongPlayer;
