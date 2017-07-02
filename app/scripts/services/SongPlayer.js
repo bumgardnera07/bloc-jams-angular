@@ -51,6 +51,11 @@
               SongPlayer.currentTime = currentBuzzObject.getTime();
             });
           });
+          currentBuzzObject.bind('volumechange', function() {
+            $rootScope.$apply(function() {
+              SongPlayer.volume = currentBuzzObject.getVolume();
+            });
+          });
 
           SongPlayer.currentSong = song;
           SongPlayer.currentAlbum = currentAlbum;
@@ -63,6 +68,11 @@
           var getSongIndex = function(song) {
               return currentAlbum.songs.indexOf(song);
           };
+          /**
+          * @desc Current volume of playback (Buzz 0-100)
+          * @type {Number}
+          */
+          SongPlayer.volume = null;
           /**
           * @desc current song object from album songs array
           * @type {Object}
@@ -103,6 +113,16 @@
       song = song || SongPlayer.currentSong;
       currentBuzzObject.pause();
       song.playing = false;
+    };
+    /**
+    * @function setVolume
+    * @desc Set volume (1-100) of currently playing song using Buzz setVolume
+    * @param {Number} volume
+    */
+    SongPlayer.setCurrentVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+              }
     };
     /**
     * @function setCurrentTime
