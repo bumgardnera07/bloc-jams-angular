@@ -114,15 +114,11 @@
     height: 0.5rem;
     width: 0.5rem;
     background-color: white;
-    left: 36%;
     top: 50%;
     margin-left: -0.25rem;
     margin-top: -0.25rem;
     border-radius: 50%;
     cursor: pointer;
-    -webkit-transition: all 100ms ease-in-out;
-       -moz-transition: all 100ms ease-in-out;
-            transition: all 100ms ease-in-out;
 }
 
 .seek-bar:hover .thumb {
@@ -144,7 +140,7 @@
 }
 
 .player-bar .volume .seek-bar {
-    display:inline-block; 
+    display:inline-block;
     width: 5.75rem;
     vertical-align: middle;
 }
